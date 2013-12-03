@@ -2,6 +2,9 @@
 #include "stdlib.h"
 #include "string.h"
 
+// Number of lights
+#define NUMLIGHTS 9
+
 // Initialize all the lights for the program
 sbit led1 = P2^4;
 sbit led2 = P0^5; // Yellow

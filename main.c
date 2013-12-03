@@ -14,6 +14,14 @@ void lightDelay()
 
 void  hline()
 {
+	int i=0;
+	
+	//for( i=0; i<NUMLIGHTS; i++)
+	//{
+	//	leds[i] = ON;
+	//  lightDelay( );
+	//  leds[i] = OFF;
+	//}
 	led1 = ON;
 	led1 = OFF;
 	lightDelay();
