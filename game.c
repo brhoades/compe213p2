@@ -1,4 +1,4 @@
-iint gen_rand()
+int gen_rand()
 {
  int r = rand()%9;
  ret r;
