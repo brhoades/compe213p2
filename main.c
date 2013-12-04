@@ -49,7 +49,7 @@ void ledC( char num, bit state )
 
 void msleep(unsigned char ms)
 {
-	unsigned long us = floor(1000*ms/12);
+	unsigned long us = 1000*ms/2-7; //div = 3 cyc, mult 3, sub 1
 	
 	while(us--)
 	{
@@ -59,7 +59,9 @@ void msleep(unsigned char ms)
 
 void usleep(unsigned int us)
 {
-	us = floor(us/12);
+	us = floor(us/2)-6; //floor is about 2 cycles and divide 3. sub 1
+						//Divide / 2 since we do 2 ops a loop
+						//
 	
 	while(us--)
 	{
