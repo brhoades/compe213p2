@@ -2,6 +2,7 @@
 //#include "STARTUP.A51"
 //#include "reg932.h"
 #include "main.h"
+#include "unistd.h"
 
 void ledC( char num, bit state )
 {
@@ -52,76 +53,32 @@ void startupSound()
 
 void lightDelay()
 {
+	//500ms => 500,000,000 microseconds
+	nanosleep( 500000000 );
 }
 
 void hline()
 {
-	led1 = ON;
-	lightDelay();
-	led1 = OFF;
+	int i;
 	
-	led2 = ON;
-	lightDelay();
-	led2 = OFF;
-	
-	led3 = ON;
-	lightDelay();
-	led3 = OFF;
-	
-	led4 = ON;
-	lightDelay();
-	led4 =  OFF;
-	
-	led5 = ON;
-	lightDelay();
-	led5 = OFF;
-	
-	led6 = ON;
-	lightDelay();
-	led6 = OFF;
-	
-	led7 = ON;
-	lightDelay();
-	led7 = OFF;
-	
-	led8 = ON;
-	lightDelay();
-	led8 = OFF;
-	
-	led9 = ON;
-	lightDelay();
-	led9 = OFF;
+	for( i=0; i<NUMLEDS; i++ )
+	{
+		ledC( horizontalOrder[i], ON );
+		lightDelay( );
+		ledC( horizontalOrder[i], OFF );
+	}
 }
 
 void rline()
 {
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
+	int i;
+	
+	for( i=NUMLEDS-1; i>=0; i-- )
+	{
+		ledC( horizontalOrder[i], ON );
+		lightDelay( );
+		ledC( horizontalOrder[i], OFF );
+	}
 }
 
 void vline()
