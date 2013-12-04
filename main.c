@@ -59,7 +59,8 @@ void msleep(unsigned char ms)
 
 void usleep(unsigned int us)
 {
-	us = floor(us/12)
+	us = floor(us/12);
+	
 	while(us--)
 	{
 		_nop_();
