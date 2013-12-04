@@ -51,6 +51,17 @@ void ledC( char num, bit state )
 	}
 }
 
+void sound( int pitch, int ms ) //pitch is in hz
+{
+	unsigned int period = floor(pitch/2); //get the period for the timer
+	
+	//global length, this is the time in terms of the pitch
+	timerLen = floor(ms*1000/pitch);	
+	th0b = TH0 = period & 0xFF;
+	tl0b = TL0 = period >> 8;
+	TR0 = 1
+}
+
 void timer0_ISR (void) interrupt 1
 {
 	SPKR = !SPKR
@@ -179,19 +190,6 @@ void startup()
 void mainloop()
 {
 }
-
-void sound( int pitch, int ms ) //pitch is in hz
-{
-	unsigned int period = floor(pitch/2); //get the period for the timer
-	
-	//global length, this is the time in terms of the pitch
-	timerLen = floor(ms*1000/pitch);	
-	th0b = TH0 = period & 0xFF;
-	tl0b = TL0 = period >> 8;
-	TR0 = 1
-}
-
-
 
 void main( void )
 {
