@@ -199,8 +199,9 @@ void main( void )
 	P2M1 = 0x00;
 	
 	EA = 1;
+	IE = 0x82;
 	//Setup timers
-	TMOD = 0x20;
+	TMOD = 0x02;
 	TH0 = 0;
 	TL0 = 0;
 	
