@@ -4,6 +4,11 @@
 #include <intrins.h>
 #include <math.h>
 
+//global for sound length
+unsigned long timerLen = 0;
+unsigned char th0b = 0;
+unsigned char tl0b = 0;
+
 void ledC( char num, bit state )
 {
 	switch( num )
@@ -46,6 +51,18 @@ void ledC( char num, bit state )
 	}
 }
 
+void timer0_ISR (void) interrupt 1
+{
+	SPKR = !SPKR
+	if( timerLen-- == 0 )
+		TR0 = 0;
+		return;
+	else
+	{
+		TH0 = th0b;
+		TL0 = tl0b;
+	}
+}
 
 void msleep(unsigned char ms)
 {
@@ -72,6 +89,7 @@ void usleep(unsigned int us)
 void startupSound()
 {
 	// Need to write sound function using the timer
+	sound( 550, 1000 );
 }
 
 void lightDelay()
@@ -160,6 +178,19 @@ void mainloop()
 {
 }
 
+void sound( int pitch, int ms ) //pitch is in hz
+{
+	unsigned int period = floor(pitch/2); //get the period for the timer
+	
+	//global length, this is the time in terms of the pitch
+	timerLen = floor(ms*1000/pitch);	
+	th0b = TH0 = period & 0xFF;
+	tl0b = TL0 = period >> 8;
+	TR0 = 1
+}
+
+
+
 void main( void )
 {
 	//Set P1-P3 to bidirectional
@@ -167,6 +198,7 @@ void main( void )
 	P1M1 = 0x00;
 	P2M1 = 0x00;
 	
+	EA = 1;
 	//Setup timers
 	TMOD = 0x20;
 	TH0 = 0;

@@ -27,6 +27,9 @@ sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
 
+// Speaker
+sbit SPKR = P1^7;
+
 // Order of leds from top left to bottom right, done horizontally
 char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
