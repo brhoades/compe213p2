@@ -142,14 +142,15 @@ void startup()
 void mainloop()
 {
 }
-int main()
+void main( void )
 {
-	// not sure how to set p0 and p1 to bi-directional
+	P0M1 = 0x00;
+	P1M1 = 0x00;
+	P2M1 = 0x00;
 	TMOD = 0;
 	TH0 = 0;
 	TL0 = 0;
-	printf("Hello World");
+	//printf("Hello World");
 	startup();
-	
-	return 0;
+
 }
