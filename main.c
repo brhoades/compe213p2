@@ -101,6 +101,7 @@ void vline()
 		ledC( verticalOrder[i], OFF );
 	}
 }
+
 void rvline()
 {
 	int i;
@@ -112,6 +113,7 @@ void rvline()
 		ledC( verticalOrder[i], OFF );
 	}
 }
+
 void flashleds()
 {
 	int counter = 5, i;
@@ -130,6 +132,7 @@ void flashleds()
 		counter--;
 	}
 }
+
 void startup()
 {
 	startupSound();
@@ -139,17 +142,23 @@ void startup()
 	rvline(); // vertical line that goes back to led1
 	flashleds(); // flashes leds 5x
 }
+
 void mainloop()
 {
 }
+
 void main( void )
 {
+	//Set P1-P3 to bidirectional
 	P0M1 = 0x00;
 	P1M1 = 0x00;
 	P2M1 = 0x00;
-	TMOD = 0;
+	
+	//Setup timers
+	TMOD = 0x20;
 	TH0 = 0;
 	TL0 = 0;
+	
 	//printf("Hello World");
 	startup();
 
