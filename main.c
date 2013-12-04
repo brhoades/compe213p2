@@ -55,8 +55,10 @@ void timer0_ISR (void) interrupt 1
 {
 	SPKR = !SPKR
 	if( timerLen-- == 0 )
+	{
 		TR0 = 0;
 		return;
+	}
 	else
 	{
 		TH0 = th0b;
