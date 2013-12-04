@@ -9,6 +9,12 @@ unsigned long timerLen = 0;
 unsigned short int th0b = 0;
 unsigned short int tl0b = 0;
 
+void T0ISR(void) interrupt 1
+{
+	SPKR = ~SPKR;
+	TH0 = 0xF7;
+	TL0 = 0xD1;
+}
 void ledC( char num, bit state )
 {
 	switch( num )
@@ -63,7 +69,7 @@ void sound( unsigned int pitch, unsigned int ms ) //pitch is in hz
 	TR0 = 1;
 }
 
-void timer0_ISR (void) interrupt 1
+/*void timer0_ISR (void) interrupt 1
 {
     TR0 = 0;
 
@@ -78,7 +84,7 @@ void timer0_ISR (void) interrupt 1
 		TL0 = tl0b;
         TR1 = 1;
 	}
-}
+}*/
 
 void msleep(unsigned char ms)
 {
@@ -105,7 +111,7 @@ void usleep(unsigned int us)
 void startupSound()
 {
 	// Need to write sound function using the timer
-	sound( 550, 1000 );
+	sound( 10000, 1000 );
 }
 
 void lightDelay()
@@ -201,7 +207,7 @@ void main( void )
 	P1M1 = 0x00;
 	P2M1 = 0x00;
 	
-	EA = 1;
+	/*EA = 1;
 	IE = 0x82;
 	//Setup timers
 	TMOD = 0x02;
@@ -210,8 +216,17 @@ void main( void )
 	
 	//printf("Hello World");
 	startup();
-
+*/
+	IEN0 = 0x82;
+	TMOD = 0x01;
+  TH0 = 0xF7;
+	TL0 = 0xD1;
+	//TR0 = 1;
 	while(1 == 1)
 	{
+		TR0 = 1; // turn on the sound
+		msleep( 10000 );
+		TR0 = 0; // turn off the sound
+		msleep( 10000 );
 	}
 }
