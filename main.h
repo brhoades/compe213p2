@@ -28,6 +28,7 @@ sbit sw8 = P0^3;
 sbit sw9 = P2^2;
 
 // Speaker
+sfr IE = 0xA8;
 sbit SPKR = P1^7;
 
 // Order of leds from top left to bottom right, done horizontally
