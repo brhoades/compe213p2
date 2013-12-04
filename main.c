@@ -63,7 +63,7 @@ void startupSound()
 
 void lightDelay()
 {
-	msleep( 250 );
+	msleep( 15 );
 }
 
 void hline()
@@ -126,7 +126,7 @@ void flashleds()
 		{
 			ledC( verticalOrder[i], OFF );
 		}
-		
+		lightDelay();
 		counter--;
 	}
 }
