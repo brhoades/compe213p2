@@ -65,16 +65,18 @@ void sound( unsigned int pitch, unsigned int ms ) //pitch is in hz
 
 void timer0_ISR (void) interrupt 1
 {
+    TR0 = 0;
+
 	SPKR = !SPKR;
 	if( timerLen-- == 0 )
 	{
-		TR0 = 0;
 		return;
 	}
 	else
 	{
 		TH0 = th0b;
 		TL0 = tl0b;
+        TR1 = 1;
 	}
 }
 
@@ -200,7 +202,7 @@ void main( void )
 	P2M1 = 0x00;
 	
 	EA = 1;
-	//IE = 0x82;
+	IE = 0x82;
 	//Setup timers
 	TMOD = 0x02;
 	TH0 = 0;
