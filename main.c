@@ -12,167 +12,74 @@ void lightDelay()
 {
 }
 
-void  hline()
+void upline()
 {
-	int i=0;
+	int i;
 	
-	//for( i=0; i<NUMLIGHTS; i++)
-	//{
-	//	leds[i] = ON;
-	//  lightDelay( );
-	//  leds[i] = OFF;
-	//}
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 =  OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
+	for( i=1; i<=NUMLIGHTS; i++ )
+	{
+		leds[i] = ON;	
+		lightDelay( );
+		leds[i] = OFF;
+	}
 }
 
-void rline()
+void downline()
 {
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
+	int i;
+	
+	for( i=NUMLIGHTS; i>0; i-- )
+	{
+		leds[i] = ON;	
+		lightDelay( );
+		leds[i] = OFF;
+	}
 }
 
-void vline()
+void leftline()
 {
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
+	for( i=1; i<=NUMLIGHTS; i++)
+	{
+		horizontalLeds[i] = ON;	
+		lightDelay( );
+		horizontalLeds[i] = OFF;
+	}
 }
-void rvline()
+void rightline()
 {
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
+	for( i=NUMLIGHTS; i>0; i-- )
+	{
+		horizontalLeds[i] = ON;	
+		lightDelay( );
+		horizontalLeds[i] = OFF;
+	}
 }
 void flashleds()
 {
-	int counter = 10;
+	int counter = 10, i;
+	
 	while(counter != 0)
 	{
-		led1 = ON;
-		led1 = OFF;
-		led2 = ON;
-		led2 = OFF;
-		led3 = ON;
-		led3 = OFF;
-		led4 = ON;
-		led4 = OFF;
-		led5 = ON;
-		led5 = OFF;
-		led6 = ON;
-		led6 = OFF;
-		led7 = ON;
-		led7 = OFF;
-		led8 = ON;
-		led8 = OFF;
-		led9 = ON;
-		led9 = OFF;
+		for( i=1; i<=NUMLIGHTS; i++ )
+		{
+			leds[i] = ON;
+		}
+		lightDelay( )
+		
+		for( i=1; i<=NUMLIGHTS; i++ )
+		{
+			leds[i] = OFF;
+		}
+		
 		counter--;
 	}
+	
 	lightDelay();
 }
 void startup()
 {
 	startupSound();
-	hline(); // horizontal line
+	upline(); // vertical
 	rline(); // line that goes back to led1
 	vline(); // vertical line
 	rvline(); // vertical line that goes back to led1
