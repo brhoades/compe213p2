@@ -2,6 +2,7 @@
 //#include "STARTUP.A51"
 #include "main.h"
 #include <intrins.h>
+#include <math.h>
 
 void ledC( char num, bit state )
 {
@@ -48,9 +49,18 @@ void ledC( char num, bit state )
 
 void msleep(unsigned char ms)
 {
-	unsigned long us = 1000*ms;
+	unsigned long us = floor(1000*ms/12);
 	
-	while (us--)
+	while(us--)
+	{
+		_nop_();
+	}
+}
+
+void usleep(unsigned int us)
+{
+	us = floor(us/12)
+	while(us--)
 	{
 		_nop_();
 	}
@@ -161,5 +171,4 @@ void main( void )
 	
 	//printf("Hello World");
 	startup();
-
 }
