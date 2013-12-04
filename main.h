@@ -19,10 +19,10 @@ sbit led9 = P2^6; // Amber
 //Array of locations of LEDs for easier use
 //These are just ordered from top to bottom
 //First is a spacer so leds[6] == led6
-sbit leds[10] = { P0, led1, led2, led3, led4, led5, led6, led7, led8, led9 };
+unsigned char leds[10] = { P0, led1, led2, led3, led4, led5, led6, led7, led8, led9 };
 
 //These are ordered from left to right
-sbit horizontalLeds[10] = { P0, led1, led4, led7, led2, led5, led8, led3, led6, led9 };
+unsigned char horizontalLeds[10] = { P0, led1, led4, led7, led2, led5, led8, led3, led6, led9 };
 
 //Precomp cheats
 #define ON 0;
