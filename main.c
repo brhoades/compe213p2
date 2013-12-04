@@ -12,8 +12,8 @@ unsigned short int tl0b = 0;
 void T0ISR(void) interrupt 1
 {
 	SPKR = ~SPKR;
-	TH0 = 0xF7;
-	TL0 = 0xD1;
+	TH0 = R5;
+	TL0 = R6;
 }
 void ledC( char num, bit state )
 {
@@ -219,14 +219,16 @@ void main( void )
 */
 	IEN0 = 0x82;
 	TMOD = 0x01;
-  TH0 = 0xF7;
-	TL0 = 0xD1;
+  R5 = 0xF7;
+	R6 = 0xD1;
+	//TH0 = 0xF7;
+	//TL0 = 0xD1;
 	//TR0 = 1;
 	while(1 == 1)
 	{
 		TR0 = 1; // turn on the sound
-		msleep( 10000 );
+		msleep( 1000 );
 		TR0 = 0; // turn off the sound
-		msleep( 10000 );
+		msleep( 1000 );
 	}
 }

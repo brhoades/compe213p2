@@ -34,8 +34,8 @@ int R1 = 0x00;
 int R2 = 0x00;
 int R3 = 0x00;
 int R4 = 0x00;
-int R5 = 0x00;
-int R6 = 0x00;
+int R5 = 0x00; // Timer Control
+int R6 = 0x00; // Timer Control
 
 // Order of leds from top left to bottom right, done horizontally
 char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
