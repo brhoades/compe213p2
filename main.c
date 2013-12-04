@@ -57,8 +57,8 @@ void sound( int pitch, int ms ) //pitch is in hz
 	
 	//global length, this is the time in terms of the pitch
 	timerLen = floor(ms*1000/pitch);	
-	th0b = TH0 = period & 0xFF;
-	tl0b = TL0 = period >> 8;
+	th0b = TH0 = period >> 8;
+	tl0b = TL0 = period & 0xFF;
 	TR0 = 1;
 }
 
