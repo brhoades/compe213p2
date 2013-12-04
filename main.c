@@ -63,7 +63,7 @@ void startupSound()
 
 void lightDelay()
 {
-	msleep( 500 );
+	msleep( 250 );
 }
 
 void hline()
@@ -92,90 +92,43 @@ void rline()
 
 void vline()
 {
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
+	int i;
+	
+	for( i=0; i<NUMLEDS; i++ )
+	{
+		ledC( verticalOrder[i], ON );
+		lightDelay( );
+		ledC( verticalOrder[i], OFF );
+	}
 }
 void rvline()
 {
-	led9 = ON;
-	led9 = OFF;
-	lightDelay();
-	led6 = ON;
-	led6 = OFF;
-	lightDelay();
-	led3 = ON;
-	led3 = OFF;
-	lightDelay();
-	led2 = ON;
-	led2 = OFF;
-	lightDelay();
-	led5 = ON;
-	led5 = OFF;
-	lightDelay();
-	led8 = ON;
-	led8 = OFF;
-	lightDelay();
-	led7 = ON;
-	led7 = OFF;
-	lightDelay();
-	led4 = ON;
-	led4 = OFF;
-	lightDelay();
-	led1 = ON;
-	led1 = OFF;
-	lightDelay();
+	int i;
+	
+	for( i=NUMLEDS-1; i>=0; i-- )
+	{
+		ledC( verticalOrder[i], ON );
+		lightDelay( );
+		ledC( verticalOrder[i], OFF );
+	}
 }
 void flashleds()
 {
-	int counter = 10;
+	int counter = 5, i;
 	while(counter != 0)
 	{
-		led1 = ON;
-		led1 = OFF;
-		led2 = ON;
-		led2 = OFF;
-		led3 = ON;
-		led3 = OFF;
-		led4 = ON;
-		led4 = OFF;
-		led5 = ON;
-		led5 = OFF;
-		led6 = ON;
-		led6 = OFF;
-		led7 = ON;
-		led7 = OFF;
-		led8 = ON;
-		led8 = OFF;
-		led9 = ON;
-		led9 = OFF;
+		for( i=0; i<NUMLEDS; i++ )
+		{
+			ledC( verticalOrder[i], ON );
+		}
+		lightDelay();
+		for( i=0; i<NUMLEDS; i++ )
+		{
+			ledC( verticalOrder[i], OFF );
+		}
+		
 		counter--;
 	}
-	lightDelay();
 }
 void startup()
 {
