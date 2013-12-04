@@ -6,8 +6,8 @@
 
 //global for sound length
 unsigned long timerLen = 0;
-unsigned char th0b = 0;
-unsigned char tl0b = 0;
+unsigned short int th0b = 0;
+unsigned short int tl0b = 0;
 
 void ledC( char num, bit state )
 {
@@ -51,14 +51,15 @@ void ledC( char num, bit state )
 	}
 }
 
-void sound( int pitch, int ms ) //pitch is in hz
+void sound( unsigned int pitch, unsigned int ms ) //pitch is in hz
 {
 	unsigned int period = floor(pitch/2); //get the period for the timer
 	
-	//global length, this is the time in terms of the pitch
+	// global length, this is the time in terms of the pitch
+    //   in other words: the number of times we reload our timers
 	timerLen = floor(ms*1000/pitch);	
-	th0b = TH0 = period >> 8;
-	tl0b = TL0 = period & 0xFF;
+	th0b = TH0 = (unsigned short int)( period >> 8 );
+	tl0b = TL0 = (unsigned short int)( period & 0xFF );
 	TR0 = 1;
 }
 
@@ -79,7 +80,7 @@ void timer0_ISR (void) interrupt 1
 
 void msleep(unsigned char ms)
 {
-	unsigned long us = 1000*ms/2-7; //div = 3 cyc, mult 3, sub 1
+	unsigned long us = floor(1000*ms/2-9); //div = 3 cyc, mult 3, sub 1, floor 2 or so
 	
 	while(us--)
 	{
