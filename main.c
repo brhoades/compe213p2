@@ -171,4 +171,8 @@ void main( void )
 	
 	//printf("Hello World");
 	startup();
+
+	while(1 == 1)
+	{
+	}
 }
