@@ -1,8 +1,7 @@
 #include "stdio.h"
 //#include "STARTUP.A51"
-//#include "reg932.h"
 #include "main.h"
-#include "unistd.h"
+#include <intrins.h>
 
 void ledC( char num, bit state )
 {
@@ -46,6 +45,17 @@ void ledC( char num, bit state )
 	}
 }
 
+
+void msleep(unsigned char ms)
+{
+	unsigned long us = 1000*ms;
+	
+	while (us--)
+	{
+		_nop_();
+	}
+}
+
 void startupSound()
 {
 	// Need to write sound function using the timer
@@ -53,8 +63,7 @@ void startupSound()
 
 void lightDelay()
 {
-	//500ms => 500,000,000 microseconds
-	nanosleep( 500000000 );
+	msleep( 500 );
 }
 
 void hline()

@@ -22,5 +22,5 @@ char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 
 // Precomp cheats
-#define ON 0;
-#define OFF 1;
+#define ON 0
+#define OFF 1
