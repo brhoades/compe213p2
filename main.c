@@ -59,12 +59,12 @@ void sound( int pitch, int ms ) //pitch is in hz
 	timerLen = floor(ms*1000/pitch);	
 	th0b = TH0 = period & 0xFF;
 	tl0b = TL0 = period >> 8;
-	TR0 = 1
+	TR0 = 1;
 }
 
 void timer0_ISR (void) interrupt 1
 {
-	SPKR = !SPKR
+	SPKR = !SPKR;
 	if( timerLen-- == 0 )
 	{
 		TR0 = 0;
