@@ -16,7 +16,7 @@
 #include "stdlib.h"
 
 #define NUMLEDS 9
-#define MAXGAMES 64
+#define MAXGAMES 7
 
 #define SOUNDRANGE 15
 					

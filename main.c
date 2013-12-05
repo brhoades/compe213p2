@@ -246,6 +246,28 @@ char getSwNum( )
   return -1;
 }
 
+void gameWin( )
+{
+  unsigned short int i=0;
+  unsigned char l;
+
+  for( i=1; i<100; i++ )
+  {
+  	if( i % 10 )
+	{
+	  ledC( l, OFF );
+      l = rand() % 9 + 1;
+      ledC( l, ON );
+    }
+    sound(i, 500);
+	msleep( 125 );
+	TR0 = 0;
+  }
+
+  ledC( l, OFF );
+  victory( );
+}
+
 void simonSays()
 {
   char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;		  
@@ -329,8 +351,8 @@ void simonSays()
     }while(gDurr == gNow);
     
   }
-  
-  return;
+
+  gameWin( );
 }
 
 void victory( )
@@ -362,9 +384,6 @@ void victory( )
    ledC( 7, OFF);
    ledC( 8, OFF);
    ledC( 9, OFF);
-
-   return;
-
 }
 
 void failure( const char correct )
