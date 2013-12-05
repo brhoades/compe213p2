@@ -1,10 +1,16 @@
 //#include "reg51.h"
+#ifndef REGNINE
+
+#define REGNINE
 #include "reg932.h"
+
+#endif
+
 #include "stdlib.h"
 #include "string.h"
 
 #define NUMLEDS 9
-#define MAXGAMES 64
+#define MAXGAMES 32
 
 // Speaker
 sbit SPKR = P1^7;
@@ -31,18 +37,6 @@ sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
 
-int R0 = 0x00;
-int R1 = 0x00;
-int R2 = 0x00;
-int R3 = 0x00;
-int R4 = 0x00;
-int R5 = 0x00; // Timer Control
-int R6 = 0x00; // Timer Control
-
-// Function Prototypes
-void ledC( char num, bit state );
-void lightDelay();
-
 // Order of leds from top left to bottom right, done horizontally
 char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
@@ -52,3 +46,7 @@ char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 // Precomp cheats
 #define ON 0
 #define OFF 1
+
+// Function Prototypes
+void ledC( char num, bit state );
+void lightDelay();
