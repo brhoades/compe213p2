@@ -300,9 +300,9 @@ void simonSays()
       
       if( getSwNum( ) == gArr[aSpot] )
       {
-        
         //wait until they let go
         while( getSwNum( ) == gArr[aSpot] );
+        msleep( 500 );
         
         TR0 = 0; //cut the sound
         
@@ -405,5 +405,8 @@ void main( void )
 
   startup();
   
-  simonSays();
+  while( 1 )
+  {
+    simonSays();
+  }
 }
