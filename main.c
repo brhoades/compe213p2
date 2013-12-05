@@ -302,7 +302,7 @@ void simonSays()
       //wait forever until they do something
       while( swSpot = getSwNum( ) == -1 );
       
-      ledC(gArr[aSpot]+1, ON);
+      ledC(swSpot+1, ON);
       sound( (gArr[aSpot]+1)*SOUNDRANGE, 30 ); //make the button's sound
       
       if( getSwNum( ) == gArr[aSpot] )
@@ -329,7 +329,7 @@ void simonSays()
         //cut the sound after a second
         msleep( 1000 );
         TR0 = 0;
-        ledC(gArr[aSpot]+1, OFF);
+        ledC(swSpot+1, OFF);
         //wait
         msleep( 500 );
         
