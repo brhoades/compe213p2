@@ -329,7 +329,7 @@ void simonSays()
         //cut the sound after a second
         msleep( 1000 );
         TR0 = 0;
-        ledC(gArr[aSpot], OFF);
+        ledC(gArr[aSpot]+1, OFF);
         //wait
         msleep( 500 );
         
