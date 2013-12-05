@@ -275,7 +275,7 @@ void simonSays()
     {
       //Give them some time to see what we're doing.
       ledC( gArr[aSpot]+1, ON );
-      sound( gArr[aSpot]*SOUNDRANGE, 50 );
+      sound( (gArr[aSpot]+1)*SOUNDRANGE, 50 );
       
       //As game goes on (gdurr increases), decrease the time between showing.
       msleep( floor( 1500 - ( 500 * ( 1 - ( MAXGAMES - gDurr ) / MAXGAMES ) ) ) );
@@ -296,7 +296,7 @@ void simonSays()
       while( swSpot = getSwNum( ) == -1 );
       
       ledC(gArr[aSpot]+1, ON);
-      sound( gArr[aSpot]*SOUNDRANGE, 30 ); //make the button's sound
+      sound( (gArr[aSpot]+1)*SOUNDRANGE, 30 ); //make the button's sound
       
       if( getSwNum( ) == gArr[aSpot] )
       {
