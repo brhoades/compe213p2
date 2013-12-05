@@ -14,14 +14,13 @@
 #endif
 
 #include "stdlib.h"
-#include "string.h"
 
 #define NUMLEDS 9
 #define MAXGAMES 32
 
 #define SOUNDRANGE 15
-
-#define STARTUPRANGE 17
+					
+#define STARTUPRANGE 5
 
 // Speaker
 sbit SPKR = P1^7;
@@ -55,7 +54,7 @@ char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 
 // Order of leds to flash when waiting for them to hit simon
-char startOrder[17] = { 2, 5, 8, 8, 8, 1, 4, 7, 8, 8, 8, 3, 6, 9, 8, 8, 8 };
+char startOrder[STARTUPRANGE] = { 2, 5, 8, 8, 8 };
 
 // Precomp cheats
 #define ON 0
@@ -64,3 +63,5 @@ char startOrder[17] = { 2, 5, 8, 8, 8, 1, 4, 7, 8, 8, 8, 3, 6, 9, 8, 8, 8 };
 // Function Prototypes
 void ledC( char num, bit state );
 void lightDelay();
+void victory();
+void failure( char correct );

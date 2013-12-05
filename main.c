@@ -10,19 +10,7 @@
 #include <intrins.h>
 #include <math.h>
 
-#ifndef MAIN
-
-#define MAIN
 #include "main.h"
-
-#endif
-
-#ifndef GAME
-
-#define GAME
-#include "game.h"
-
-#endif
 
 //global for sound length
 unsigned long int timerLen;
@@ -390,7 +378,7 @@ void failure( char correct )
 
   sound(290, 50);
   msleep(2500);
-  TR0 = 0
+  TR0 = 0;
 
   ledC( 1, OFF);
   ledC( 3, OFF);
@@ -401,7 +389,7 @@ void failure( char correct )
   for( i=0; i<2; i++ )
   {
     ledC( correct, ON );
-    sound( (gArr[aSpot]+1)*SOUNDRANGE, 30 ); //make the button's sound
+    sound( correct*SOUNDRANGE, 30 ); //make the button's sound
     msleep( 1000 );
     ledC( correct, OFF );
     TR0 = 0;
@@ -416,7 +404,6 @@ void failure( char correct )
 
 void main( void )
 {
-  long int seed = 0;
   //Set P1-P3 to bidirectional
   P0M1 = 0x00;
   P1M1 = 0x00;
@@ -427,11 +414,11 @@ void main( void )
   ET1 = 1;
   TMOD = 0x11;
 
-  startup();
+  //startup();
   
   while( 1 )
   {
-    unsigned int i = 0;
+    static unsigned int i = 0;
 
     //Get them to hit sw8 to start.
     //While we wait, count the number of cycles (and keep rolling over)
@@ -439,10 +426,8 @@ void main( void )
     // Using a 50 ms delay, 50 times, so we appear really responsive to button presses.
     while( sw8 )
     {
-      if( i * 50 > STARTUPRANGE * 50 )
-      {
+      if( i > STARTUPRANGE * 50 )
         i = 0;
-      }
 
       if( i % 50 == 0 )
       {
