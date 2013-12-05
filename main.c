@@ -112,6 +112,40 @@ void startupSound()
 {
 	// Need to write sound function using the timer
 	sound( 10000, 1000 );
+
+    while(1 == 1)
+    {
+        R5 = 0xD8;
+        R6 = 0x00;
+
+        TR0 = 1; // turn on the sound
+        msleep( 1000 );
+        TR0 = 0; // turn off the sound
+        msleep( 1000 );
+
+        R5 = 0xF0;
+        R6 = 0x00;
+
+        TR0 = 1; // turn on the sound
+        msleep( 1000 );
+        TR0 = 0; // turn off the sound
+
+        R5 = 0x90;
+        R6 = 0x00;
+
+        TR0 = 1; // turn on the sound
+        msleep( 1000 );
+        TR0 = 0; // turn off the sound
+        msleep( 1000 );
+
+        R5 = 0x40;
+        R6 = 0x00;
+
+        TR0 = 1; // turn on the sound
+        msleep( 1000 );
+        TR0 = 0; // turn off the sound
+        msleep( 1000 );
+    }
 }
 
 void lightDelay()
