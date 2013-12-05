@@ -5,19 +5,36 @@
 #include <math.h>
 
 //global for sound length
-unsigned int timerLen;
+unsigned long int timerLen;
 unsigned short int th0b, tl0b; //Backup for the high/low bit
+
+
+//sleep uses these
+unsigned int waitTime;
 
 void T0ISR(void) interrupt 1
 {
-  TR0 = 0;
   SPKR = ~SPKR;
   
   TH0 = th0b;
   TL0 = tl0b;
   
-  TR0 = 1;
+  timerLen--;
+  if( timerLen == 0 )
+    TR0 = 0;
 }
+
+void T1ISR(void) interrupt 3
+{
+  if( --waitTime == 0 )
+  {
+    TR1 = 0;
+  }
+  
+  TH1 = 0;
+  TL1 = 0;
+}
+
 
 void ledC( char num, bit state )
 {
@@ -62,85 +79,47 @@ void ledC( char num, bit state )
 }
 
 //pitch: 0-509, above about 300 is actually like a tone
-void sound( unsigned int pitch, unsigned int ms ) //pitch is in hz
+void sound( unsigned int pitch, unsigned long ms ) //pitch is in hz
 {
   unsigned char period = floor(pitch/2); //get the period for the timer
   
   // global length, this is the time in terms of the pitch
     //   in other words: the number of times we reload our timers
-  timerLen = floor(ms*1000);  
-  th0b = TH0 = period;
-  tl0b = TL0 = 0xFF;
+  timerLen = floor((ms*1000+16)/((unsigned long)period))*2;  
+  th0b = TH0 = 0xFF-period;
+  tl0b = TL0 = 0x00;
   
   TR0 = 1;
 }
 
-void msleep(unsigned char ms)
-{
-  unsigned long us = floor(1000*ms-8);
+//ms => milliseconds
+void msleep(unsigned long ms)
+{  
+  waitTime = floor(ms*2000/65536);
+  //for 1 second, or 1k ms, do 1,000,000/65536 (cycles in timer)
+  //and that's our length
   
-  while(us--)
-  {
-    _nop_();
-  }
-}
-
-void usleep(unsigned int us)
-{
-  us = floor(us/2)-6; //floor is about 2 cycles and divide 3. sub 1
-                      //Divide / 2 since we do 2 ops a loop
-                      //
+  TH1 = 0x00;
+  TL1 = 0x00;
+  TR1 = 1;
   
-  while(us--)
-  {
-    _nop_();
-  }
+  while( TR1 );
 }
 
 void startupSound()
 {
-  // Need to write sound function using the timer
-  //sound( 10000, 1000 );
-
-    sound( 490, 1000 );
-    while( 1 );
-    msleep( 1000 );
-    msleep( 1000 );
-    msleep( 1000 );
-    msleep( 1000 );
-    msleep( 1000 );
-
+    sound( 50, 500 );    
+    msleep( 500 );
     
-    TH0 = th0b = 0xD8;
-    TL0 = tl0b = 0x00;
-
-    TR0 = 1; // turn on the sound
-    msleep( 1000 );
-    TR0 = 0; // turn off the sound
-    msleep( 1000 );
-
-    TH0 = th0b = 0xF0;
-    TL0 = tl0b = 0x00;
-
-    TR0 = 1; // turn on the sound
-    msleep( 1000 );
-    TR0 = 0; // turn off the sound
-
-    TH0 = th0b = 0x90;
-    TL0 = tl0b = 0x00;
-
-    TR0 = 1; // turn on the sound
-    msleep( 1000 );
-    TR0 = 0; // turn off the sound
-    msleep( 1000 );
-
-    TH0 = th0b = 0x40;
-    TL0 = tl0b = 0x00;
-
-    TR0 = 1; // turn on the sound
-    msleep( 1000 );
-    TR0 = 0; // turn off the sound
-    msleep( 1000 );
+    sound( 100, 500 );    
+    msleep( 500 );
+    
+    sound( 75, 500 );    
+    msleep( 500 );
+    
+    sound( 45, 250 );    
+    msleep( 500 );
+    while( 1 );
 }
 
 void lightDelay()
@@ -237,18 +216,9 @@ void main( void )
   P2M1 = 0x00;
 
   IEN0 = 0x82;
-  TMOD = 0x01;
+  ET0 = 1;
+  ET1 = 1;
+  TMOD = 0x11;
 
   startup();
-
-  //TH0 = 0xF7;
-  //TL0 = 0xD1;
-  //TR0 = 1;
-  while( 1 )
-  {
-    TR0 = 1; // turn on the sound
-    msleep( 1000 );
-    TR0 = 0; // turn off the sound
-    msleep( 1000 );
-  }
 }
