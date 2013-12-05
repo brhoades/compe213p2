@@ -227,6 +227,30 @@ void startup()
   flashleds(); // flashes leds 5x
 }
 
+char getSwNum( )
+{
+  if(!sw1)
+    return 0;
+  else if(!sw2)
+    return 1;
+  else if(!sw3)
+    return 2;
+  else if(!sw4)
+    return 3;
+  else if(!sw5)
+    return 4;
+  else if(!sw6)
+    return 5;
+  else if(!sw7)
+    return 6;
+  else if(!sw8)
+    return 7;
+  else if(!sw9)
+    return 8;
+  
+  return -1;
+}
+
 void simonSays()
 {
   char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;
@@ -239,17 +263,21 @@ void simonSays()
     //this loop shows the light order
     do
     {
-      if(aSpot != 0)
-        ledC(button, OFF);
-      button = rand() % 9;
+      button = rand() % 9; //returns [0,8]
       gArr[aSpot] = button;
+      
       ledC(button, ON);
       aSpot++;
-      lightDelay();
-      lightDelay();
+      
+      //Give them some time to see what we're doing.
+      //As game goes on (gdurr increases), decrease the time between showing.
+      msleep( floor( 1500 - ( 500 * ( 1 - ( MAXGAMES - gDurr ) / MAXGAMES ) ) ) );
+      
+      ledC(button, OFF);
     }
     while(aSpot != gDurr);
 
+    //put our index back at 0 and ask the user to do input
     aSpot = 0;
 
     //this loop is when the user puts in the numbers
@@ -257,32 +285,11 @@ void simonSays()
     {
       //change to the buttons function
       //because of active low if thw Switch = 1 it is not being pushed
-      while( sw1 && sw2 && sw3 && sw4 && sw5 && sw6 && sw7 && sw8 && sw9 );
+      //wait forever until they do something
+      while( swSpot = getSwNum( ) == -1 );
       
-      if(!sw1)
-        swSpot = 1;
-      else
-      {
-        if(!sw2)
-          swSpot = 2;
-        else
-        {
-          if(!sw3)
-            swSpot = 3;
-          else if(!sw4)
-            swSpot = 4;
-          else if(!sw5)
-            swSpot = 5;
-          else if(!sw6)
-            swSpot = 6;
-          else if(!sw7)
-            swSpot = 7;
-          else if(!sw8)
-            swSpot = 8;
-          else if(!sw9)
-            swSpot = 9;
-        }
-      }
+      swSpot = getSwNum( );
+        
       if(swSpot == gArr[aSpot])
       {
         ledC(gArr[aSpot], ON);
@@ -299,8 +306,9 @@ void simonSays()
         failure();
         return;  
       } 
-         
+        
     }while(gDurr == gNow);
+    
   }
   
   return;
