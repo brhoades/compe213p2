@@ -248,8 +248,8 @@ char getSwNum( )
 
 void simonSays()
 {
-  char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;
-  char gArr[MAXGAMES]; 
+  static char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;		  
+  static char gArr[MAXGAMES]; 
         
   while(gDurr != MAXGAMES)
   {
@@ -288,12 +288,13 @@ void simonSays()
       //change to the buttons function
       //because of active low if thw Switch = 1 it is not being pushed
       //wait forever until they do something
-      while( swSpot = getSwNum( ) == -1 );
-      
+      while( getSwNum( ) == -1 );
+      swSpot = getSwNum( );      
+
       ledC(swSpot+1, ON);
       sound( (gArr[aSpot]+1)*SOUNDRANGE, 30 ); //make the button's sound
       
-      if( getSwNum( ) == gArr[aSpot] )
+      if( swSpot == gArr[aSpot] )
       {
         //wait until they let go
         while( getSwNum( ) == gArr[aSpot] );
@@ -301,7 +302,7 @@ void simonSays()
         
         TR0 = 0; //cut the sound
         
-        ledC(gArr[aSpot]+1, OFF);
+        ledC(swSpot+1, OFF);
       
         aSpot++;
 
