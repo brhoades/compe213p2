@@ -25,27 +25,28 @@
 // Speaker
 sbit SPKR = P1^7;
 
+// Note that the pinout diagram has different LED/SW nums!
 // Initialize all the lights for the program
-sbit led1 = P2^4;
-sbit led2 = P0^5; // Yellow
-sbit led3 = P2^7; // Green
-sbit led4 = P0^6; // Amber
-sbit led5 = P1^6; // Blue
-sbit led6 = P0^4; // Red
-sbit led7 = P2^5; // Yellow
-sbit led8 = P0^7; // Green
-sbit led9 = P2^6; // Amber
+sbit led1 = P2^4; // Red, top left
+sbit led2 = P0^6; // Amber, middle left
+sbit led3 = P2^5; // Yellow, bottom left
+sbit led4 = P0^5; // Yellow, top middle
+sbit led5 = P1^6; // Blue, middle
+sbit led6 = P0^7; // Green, bottom middle
+sbit led7 = P2^7; // Green, top right
+sbit led8 = P0^4; // Red, middle right
+sbit led9 = P2^6; // Amber, bottom right
 
 // Initialize the switches for the program
-sbit sw1 = P2^0;
-sbit sw2 = P0^1;
-sbit sw3 = P2^3;
-sbit sw4 = P0^2;
-sbit sw5 = P1^4;
-sbit sw6 = P0^0;
-sbit sw7 = P2^1;
-sbit sw8 = P0^3;
-sbit sw9 = P2^2;
+sbit sw1 = P2^0; // Red, top left
+sbit sw2 = P0^2; // Amber, middle left
+sbit sw3 = P2^1; // Yellow, bottom left
+sbit sw4 = P0^1; // Yellow, top middle
+sbit sw5 = P1^4; // Blue, middle
+sbit sw6 = P0^3; // Green, bottom middle
+sbit sw7 = P2^3; // Green, top right
+sbit sw8 = P0^0; // Red, middle right
+sbit sw9 = P2^2; // Amber, bottom right
 
 // Order of leds from top left to bottom right, done horizontally
 char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
