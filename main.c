@@ -416,6 +416,7 @@ void failure( char correct )
 
 void main( void )
 {
+  long int seed = 0;
   //Set P1-P3 to bidirectional
   P0M1 = 0x00;
   P1M1 = 0x00;
@@ -430,6 +431,39 @@ void main( void )
   
   while( 1 )
   {
+    unsigned int i = 0;
+
+    //Get them to hit sw8 to start.
+    //While we wait, count the number of cycles (and keep rolling over)
+    // and use that as our seed.
+    // Using a 50 ms delay, 50 times, so we appear really responsive to button presses.
+    while( sw8 )
+    {
+      if( i * 50 > STARTUPRANGE * 50 )
+      {
+        i = 0;
+      }
+
+      if( i % 50 == 0 )
+      {
+        if( i > 50 )
+          ledC( startOrder[i/50], OFF );
+        else
+          ledC( startOrder[STARTUPRANGE-1], OFF );
+
+        ledC( startOrder[i/50], ON );
+      }
+
+      i++;
+      msleep( 50 );
+    }
+
+
+    srand( i );
+    for( i=0; i<NUMLEDS; i++ )
+    {
+      ledC( horizontalOrder[i], OFF );
+    }
     simonSays();
   }
 }
