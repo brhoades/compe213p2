@@ -263,17 +263,18 @@ void simonSays()
     //this loop shows the light order
     do
     {
-      button = rand() % 9; //returns [0,8]
+      button = (char)(rand() % 9); //returns [0,8]
       gArr[aSpot] = button;
-      
-      ledC(button, ON);
       aSpot++;
       
       //Give them some time to see what we're doing.
+      ledC(button+1, ON);
+      sound( button*SOUNDRANGE, 50 );
       //As game goes on (gdurr increases), decrease the time between showing.
       msleep( floor( 1500 - ( 500 * ( 1 - ( MAXGAMES - gDurr ) / MAXGAMES ) ) ) );
+      TR0 = 0; //cut the sound
       
-      ledC(button, OFF);
+      ledC( button+1, OFF );
     }
     while(aSpot != gDurr);
 
@@ -288,14 +289,22 @@ void simonSays()
       //wait forever until they do something
       while( swSpot = getSwNum( ) == -1 );
       
-      swSpot = getSwNum( );
-        
-      if(swSpot == gArr[aSpot])
+      ledC(gArr[aSpot]+1, ON);
+      sound( gArr[aSpot]*SOUNDRANGE, 30 ); //make the button's sound
+      
+      if( getSwNum( ) == gArr[aSpot] )
       {
-        ledC(gArr[aSpot], ON);
+        
+        //wait until they let go
+        while( getSwNum( ) == gArr[aSpot] );
+        
+        TR0 = 0; //cut the sound
+        
+        ledC(gArr[aSpot]+1, OFF);
+      
         aSpot++;
-        ledC(gArr[aSpot], OFF);
-        if( aSpot == gDurr)
+
+        if( aSpot >= gDurr)
         {  
           victory();
           gDurr++;
@@ -303,6 +312,13 @@ void simonSays()
       }
       else
       {
+        //cut the sound after a second
+        msleep( 1000 );
+        TR0 = 0;
+        ledC(gArr[aSpot], OFF);
+        //wait
+        msleep( 500 );
+        
         failure();
         return;  
       } 

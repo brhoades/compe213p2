@@ -12,6 +12,8 @@
 #define NUMLEDS 9
 #define MAXGAMES 32
 
+#define SOUNDRANGE 15
+
 // Speaker
 sbit SPKR = P1^7;
 
