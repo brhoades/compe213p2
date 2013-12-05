@@ -20,7 +20,7 @@
 
 #define SOUNDRANGE 15
 					
-#define STARTUPRANGE 5
+#define STARTUPRANGE 7
 
 // Speaker
 sbit SPKR = P1^7;
@@ -55,7 +55,8 @@ char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 
 // Order of leds to flash when waiting for them to hit simon
-char startOrder[STARTUPRANGE] = { 2, 5, 8, 8, 8 };
+// Spaced w/ 10, which does nothing
+char startOrder[STARTUPRANGE] = { 2, 5, 8, 10, 8, 10, 8 };
 
 // Precomp cheats
 #define ON 0

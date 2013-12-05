@@ -420,6 +420,7 @@ void main( void )
   while( 1 )
   {
     static unsigned int i = 0;
+	i = 0;
 
     //Get them to hit sw8 to start.
     //While we wait, count the number of cycles (and keep rolling over)
@@ -432,8 +433,8 @@ void main( void )
 
       if( i % 50 == 0 )
       {
-        if( i > 50 )
-          ledC( startOrder[i/50], OFF );
+        if( i >= 50 )
+          ledC( startOrder[i/50-1], OFF );
         else
           ledC( startOrder[STARTUPRANGE-1], OFF );
 
