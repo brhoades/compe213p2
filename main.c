@@ -240,20 +240,12 @@ void main( void )
 	P0M1 = 0x00;
 	P1M1 = 0x00;
 	P2M1 = 0x00;
-	
-	/*EA = 1;
-	IE = 0x82;
-	//Setup timers
-	TMOD = 0x02;
-	TH0 = 0;
-	TL0 = 0;
-	
-	//printf("Hello World");
-	startup();
-*/
+
+    startup();
+
 	IEN0 = 0x82;
 	TMOD = 0x01;
-  R5 = 0xF7;
+    R5 = 0xF7;
 	R6 = 0xD1;
 	//TH0 = 0xF7;
 	//TL0 = 0xD1;
