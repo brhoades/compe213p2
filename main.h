@@ -16,11 +16,11 @@
 #include "stdlib.h"
 
 #define NUMLEDS 9
-#define MAXGAMES 32
+#define MAXGAMES 64
 
 #define SOUNDRANGE 15
 					
-#define STARTUPRANGE 7
+#define STARTUPRANGE 35
 
 // Speaker
 sbit SPKR = P1^7;
@@ -49,14 +49,16 @@ sbit sw8 = P0^0; // Red, middle right
 sbit sw9 = P2^2; // Amber, bottom right
 
 // Order of leds from top left to bottom right, done horizontally
-char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+idata const char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 // Order of leds from top left to bottom right, done vertically
-char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
+idata const char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 
 // Order of leds to flash when waiting for them to hit simon
 // Spaced w/ 10, which does nothing
-char startOrder[STARTUPRANGE] = { 2, 5, 8, 10, 8, 10, 8 };
+idata const char startOrder[STARTUPRANGE] = { 2, 5, 8, 10, 8, 10, 8, 1, 4, 7, 8, 10, 8, 10, 8, 3, 6, 9, 8, 10, 8, 10, 8, 7, 4, 1, 2, 3, 6, 9, 8, 10, 8, 10, 8 };
+
+idata const char plus[5] = { 2, 4, 5, 6, 8 };
 
 // Precomp cheats
 #define ON 0

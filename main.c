@@ -147,7 +147,7 @@ void lightDelay()
 
 void hline()
 {
-  int i;
+  char i;
   
   for( i=0; i<NUMLEDS; i++ )
   {
@@ -159,7 +159,7 @@ void hline()
 
 void rline()
 {
-  int i;
+  char i;
   
   for( i=NUMLEDS-1; i>=0; i-- )
   {
@@ -171,7 +171,7 @@ void rline()
 
 void vline()
 {
-  int i;
+  char i;
   
   for( i=0; i<NUMLEDS; i++ )
   {
@@ -183,7 +183,7 @@ void vline()
 
 void rvline()
 {
-  int i;
+  char i;
   
   for( i=NUMLEDS-1; i>=0; i-- )
   {
@@ -195,7 +195,7 @@ void rvline()
 
 void flashleds()
 {
-  int counter = 2, i;
+  static char counter = 2, i;
   while(counter != 0)
   {
     for( i=0; i<NUMLEDS; i++ )
@@ -248,8 +248,8 @@ char getSwNum( )
 
 void simonSays()
 {
-  static char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;		  
-  static char gArr[MAXGAMES]; 
+  char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;		  
+  idata char gArr[MAXGAMES]; 
         
   while(gDurr != MAXGAMES)
   {
@@ -369,7 +369,7 @@ void victory( )
 
 void failure( char correct )
 {
-  char i;
+ char i;
 
   ledC( 1, ON);
   ledC( 3, ON);
@@ -419,7 +419,7 @@ void main( void )
   
   while( 1 )
   {
-    static unsigned int i = 0;
+    unsigned int i = 0;
 	i = 0;
 
     //Get them to hit sw8 to start.
