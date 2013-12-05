@@ -333,7 +333,7 @@ void simonSays()
         //wait
         msleep( 500 );
         
-        failure();
+        failure( gArr[aSpot]+1 );
         return;  
       } 
         
@@ -344,7 +344,7 @@ void simonSays()
   return;
 }
 
-void victory()
+void victory( )
 {
    ledC( 1, ON);
    lightDelay();
@@ -378,22 +378,38 @@ void victory()
 
 }
 
-void failure()
+void failure( char correct )
 {
+  char i;
+
   ledC( 1, ON);
   ledC( 3, ON);
   ledC( 5, ON);
   ledC( 7, ON);
   ledC( 9, ON);
+
   sound(290, 50);
-  msleep(5000);
-  TR0 = 0;
+  msleep(2500);
+  TR0 = 0
 
   ledC( 1, OFF);
   ledC( 3, OFF);
   ledC( 5, OFF);
   ledC( 7, OFF);
   ledC( 9, OFF);
+
+  for( i=0; i<2; i++ )
+  {
+    ledC( correct, ON );
+    sound( (gArr[aSpot]+1)*SOUNDRANGE, 30 ); //make the button's sound
+    msleep( 1000 );
+    ledC( correct, OFF );
+    TR0 = 0;
+    msleep( 500 );
+  }
+
+
+  TR0 = 0;
 
   return;
 }
