@@ -5,18 +5,17 @@
 #include <math.h>
 
 //global for sound length
-unsigned long timerLen = 0;
-unsigned short int th0b = 0; //Backup for the high bit
-unsigned short int tl0b = 0; //Backup for the low bit
+unsigned int timerLen;
+unsigned short int th0b, tl0b; //Backup for the high/low bit
 
 void T0ISR(void) interrupt 1
 {
   TR0 = 0;
-
   SPKR = ~SPKR;
+  
   TH0 = th0b;
   TL0 = tl0b;
-
+  
   TR0 = 1;
 }
 
@@ -62,21 +61,23 @@ void ledC( char num, bit state )
   }
 }
 
+//pitch: 0-509, above about 300 is actually like a tone
 void sound( unsigned int pitch, unsigned int ms ) //pitch is in hz
 {
-  unsigned int period = floor(pitch/2); //get the period for the timer
+  unsigned char period = floor(pitch/2); //get the period for the timer
   
   // global length, this is the time in terms of the pitch
     //   in other words: the number of times we reload our timers
-  timerLen = floor(ms*1000/pitch);  
-  th0b = TH0 = (unsigned short int)( period >> 8 );
-  tl0b = TL0 = (unsigned short int)( period & 0xFF );
+  timerLen = floor(ms*1000);  
+  th0b = TH0 = period;
+  tl0b = TL0 = 0xFF;
+  
   TR0 = 1;
 }
 
 void msleep(unsigned char ms)
 {
-  unsigned long us = floor(1000*ms/2-9); //div = 3 cyc, mult 3, sub 1, floor 2 or so
+  unsigned long us = floor(1000*ms-8);
   
   while(us--)
   {
@@ -101,6 +102,15 @@ void startupSound()
   // Need to write sound function using the timer
   //sound( 10000, 1000 );
 
+    sound( 490, 1000 );
+    while( 1 );
+    msleep( 1000 );
+    msleep( 1000 );
+    msleep( 1000 );
+    msleep( 1000 );
+    msleep( 1000 );
+
+    
     TH0 = th0b = 0xD8;
     TL0 = tl0b = 0x00;
 
@@ -228,8 +238,6 @@ void main( void )
 
   IEN0 = 0x82;
   TMOD = 0x01;
-  R5 = 0xF7;
-  R6 = 0xD1;
 
   startup();
 
