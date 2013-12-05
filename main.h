@@ -37,6 +37,10 @@ int R4 = 0x00;
 int R5 = 0x00; // Timer Control
 int R6 = 0x00; // Timer Control
 
+// Function Prototypes
+void ledC( char num, bit state );
+void lightDelay();
+
 // Order of leds from top left to bottom right, done horizontally
 char horizontalOrder[NUMLEDS] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 

@@ -1,14 +1,21 @@
+#include "stdlib.h"
+#include "main.h"
+// Function Prototypes
+void victory();
+void failure();
+
+
 int gen_rand()
 {
  int r = rand()%9;
- ret r;
-};
+ return r;
+}
 
 void simonSays()
 {
 	int aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;
 	const int GAME_MAX = 64;
-	int gArr[GAME_MAX];
+	int gArr[64]; // GAME_MAX
 
 	while(gDurr != GAME_MAX)
 	{
@@ -78,14 +85,14 @@ void simonSays()
 			else
 			{
 		 		failure();
-				ret;	
+				return;	
 			} 
 	  	 	
 	    }while(gDurr == gNow);
 	}
-	ret;
+	return;
 
-};
+}
 void victory()
 {
    ledC( 1, ON);
@@ -116,9 +123,9 @@ void victory()
    ledC( 8, OFF);
    ledC( 9, OFF);
 
-   ret;
+   return;
 
-};
+}
 void failure()
 {
    ledC( 1, ON);
@@ -138,6 +145,6 @@ void failure()
    ledC( 7, OFF);
    ledC( 9, OFF);
 
-   ret;
+   return;
 
- };
+ }
