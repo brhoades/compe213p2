@@ -256,9 +256,9 @@ void simonSays()
     do
     {
       //change to the buttons function
-      while((sw1)&&(sw2)&&(sw3)&&(sw4)&&(sw5)&&(sw6)&&(sw7)&&(sw8)&&(sw9))//because of active low if thw Switch = 1 it is not being pushed
-      {
-      }
+      //because of active low if thw Switch = 1 it is not being pushed
+      while( sw1 && sw2 && sw3 && sw4 && sw5 && sw6 && sw7 && sw8 && sw9 );
+      
       if(!sw1)
         swSpot = 1;
       else
@@ -287,8 +287,6 @@ void simonSays()
       {
         ledC(gArr[aSpot], ON);
         aSpot++;
-        lightDelay();
-        lightDelay();
         ledC(gArr[aSpot], OFF);
         if( aSpot == gDurr)
         {  
@@ -344,24 +342,22 @@ void victory()
 
 void failure()
 {
-   ledC( 1, ON);
-   ledC( 3, ON);
-   ledC( 5, ON);
-   ledC( 7, ON);
-   ledC( 9, ON);
-   lightDelay();
-   lightDelay();
-   lightDelay();
-   lightDelay();
-   lightDelay();
+  ledC( 1, ON);
+  ledC( 3, ON);
+  ledC( 5, ON);
+  ledC( 7, ON);
+  ledC( 9, ON);
+  sound(290, 50);
+  msleep(5000);
+  TR0 = 0;
 
-   ledC( 1, OFF);
-   ledC( 3, OFF);
-   ledC( 5, OFF);
-   ledC( 7, OFF);
-   ledC( 9, OFF);
+  ledC( 1, OFF);
+  ledC( 3, OFF);
+  ledC( 5, OFF);
+  ledC( 7, OFF);
+  ledC( 9, OFF);
 
-   return;
+  return;
 }
 
 void main( void )
