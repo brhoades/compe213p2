@@ -6,6 +6,9 @@
 #define NUMLEDS 9
 #define MAXGAMES 64
 
+// Speaker
+sbit SPKR = P1^7;
+
 // Initialize all the lights for the program
 sbit led1 = P2^4;
 sbit led2 = P0^5; // Yellow
@@ -28,8 +31,6 @@ sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
 
-// Speaker
-sbit SPKR = P1^7;
 int R0 = 0x00;
 int R1 = 0x00;
 int R2 = 0x00;
