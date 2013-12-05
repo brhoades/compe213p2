@@ -6,14 +6,18 @@
 
 //global for sound length
 unsigned long timerLen = 0;
-unsigned short int th0b = 0;
-unsigned short int tl0b = 0;
+unsigned short int th0b = 0; //Backup for the high bit
+unsigned short int tl0b = 0; //Backup for the low bit
 
 void T0ISR(void) interrupt 1
 {
+    TR0 = 0;
+
 	SPKR = ~SPKR;
-	TH0 = R5;
-	TL0 = R6;
+	TH0 = th0b;
+	TL0 = tl0b;
+
+    TR0 = 1;
 }
 void ledC( char num, bit state )
 {
@@ -111,41 +115,38 @@ void usleep(unsigned int us)
 void startupSound()
 {
 	// Need to write sound function using the timer
-	sound( 10000, 1000 );
+	//sound( 10000, 1000 );
 
-    while(1 == 1)
-    {
-        R5 = 0xD8;
-        R6 = 0x00;
+    TH0 = th0b = 0xD8;
+    TL0 = tl0b = 0x00;
 
-        TR0 = 1; // turn on the sound
-        msleep( 1000 );
-        TR0 = 0; // turn off the sound
-        msleep( 1000 );
+    TR0 = 1; // turn on the sound
+    msleep( 1000 );
+    TR0 = 0; // turn off the sound
+    msleep( 1000 );
 
-        R5 = 0xF0;
-        R6 = 0x00;
+    TH0 = th0b = 0xF0;
+    TL0 = tl0b = 0x00;
 
-        TR0 = 1; // turn on the sound
-        msleep( 1000 );
-        TR0 = 0; // turn off the sound
+    TR0 = 1; // turn on the sound
+    msleep( 1000 );
+    TR0 = 0; // turn off the sound
 
-        R5 = 0x90;
-        R6 = 0x00;
+    TH0 = th0b = 0x90;
+    TL0 = tl0b = 0x00;
 
-        TR0 = 1; // turn on the sound
-        msleep( 1000 );
-        TR0 = 0; // turn off the sound
-        msleep( 1000 );
+    TR0 = 1; // turn on the sound
+    msleep( 1000 );
+    TR0 = 0; // turn off the sound
+    msleep( 1000 );
 
-        R5 = 0x40;
-        R6 = 0x00;
+    TH0 = th0b = 0x40;
+    TL0 = tl0b = 0x00;
 
-        TR0 = 1; // turn on the sound
-        msleep( 1000 );
-        TR0 = 0; // turn off the sound
-        msleep( 1000 );
-    }
+    TR0 = 1; // turn on the sound
+    msleep( 1000 );
+    TR0 = 0; // turn off the sound
+    msleep( 1000 );
 }
 
 void lightDelay()
@@ -241,12 +242,13 @@ void main( void )
 	P1M1 = 0x00;
 	P2M1 = 0x00;
 
-    startup();
-
-	IEN0 = 0x82;
-	TMOD = 0x01;
+    IEN0 = 0x82;
+    TMOD = 0x01;
     R5 = 0xF7;
-	R6 = 0xD1;
+    R6 = 0xD1;
+
+	startup();
+
 	//TH0 = 0xF7;
 	//TL0 = 0xD1;
 	//TR0 = 1;
