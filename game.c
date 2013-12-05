@@ -7,7 +7,7 @@ void failure();
 
 int gen_rand()
 {
-  int r = rand()%9;
+  char r = rand()%9;
   return r;
 }
 
@@ -23,8 +23,8 @@ void simonSays()
     //this loop shows the light order
     do
     {
-       if(aSpot != 0)
-         ledC(button, OFF);
+      if(aSpot != 0)
+        ledC(button, OFF);
       button = gen_rand();
       gArr[aSpot] = button;
       ledC(button, ON);

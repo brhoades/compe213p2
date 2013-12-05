@@ -87,8 +87,8 @@ void msleep(unsigned char ms)
 void usleep(unsigned int us)
 {
   us = floor(us/2)-6; //floor is about 2 cycles and divide 3. sub 1
-            //Divide / 2 since we do 2 ops a loop
-            //
+                      //Divide / 2 since we do 2 ops a loop
+                      //
   
   while(us--)
   {
