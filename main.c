@@ -44,7 +44,7 @@ void T1ISR(void) interrupt 3
 }
 
 
-void ledC( char num, bit state )
+void ledC( const char num, const bit state )
 {
   switch( num )
   {
@@ -87,7 +87,7 @@ void ledC( char num, bit state )
 }
 
 //pitch: 0-509, above about 300 is actually like a tone
-void sound( unsigned int pitch, unsigned long ms ) //pitch is in hz
+void sound( const unsigned int pitch, const unsigned long ms ) //pitch is in hz
 {
   unsigned char period = floor(pitch/2); //get the period for the timer
   
@@ -101,7 +101,7 @@ void sound( unsigned int pitch, unsigned long ms ) //pitch is in hz
 }
 
 //ms => milliseconds
-void msleep(unsigned long ms)
+void msleep(const unsigned long ms)
 {  
   waitTime = floor(ms*2000/65536);
   //for 1 second, or 1k ms, do 1,000,000/65536 (cycles in timer)
@@ -367,7 +367,7 @@ void victory( )
 
 }
 
-void failure( char correct )
+void failure( const char correct )
 {
  char i;
 
@@ -415,12 +415,11 @@ void main( void )
   ET1 = 1;
   TMOD = 0x11;
 
-  //startup();
+  startup();
   
   while( 1 )
   {
     unsigned int i = 0;
-	i = 0;
 
     //Get them to hit sw8 to start.
     //While we wait, count the number of cycles (and keep rolling over)
@@ -428,7 +427,7 @@ void main( void )
     // Using a 50 ms delay, 50 times, so we appear really responsive to button presses.
     while( sw8 )
     {
-      if( i > STARTUPRANGE * 50 )
+      if( i > STARTUPRANGE * 50 - 1 )
         i = 0;
 
       if( i % 50 == 0 )

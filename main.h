@@ -58,8 +58,6 @@ idata const char verticalOrder[NUMLEDS] = { 1, 4, 7, 2, 5, 8, 3, 6, 9 };
 // Spaced w/ 10, which does nothing
 idata const char startOrder[STARTUPRANGE] = { 2, 5, 8, 10, 8, 10, 8, 1, 4, 7, 8, 10, 8, 10, 8, 3, 6, 9, 8, 10, 8, 10, 8, 7, 4, 1, 2, 3, 6, 9, 8, 10, 8, 10, 8 };
 
-idata const char plus[5] = { 2, 4, 5, 6, 8 };
-
 // Precomp cheats
 #define ON 0
 #define OFF 1
