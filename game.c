@@ -7,17 +7,16 @@ void failure();
 
 int gen_rand()
 {
- int r = rand()%9;
- return r;
+  int r = rand()%9;
+  return r;
 }
 
 void simonSays()
 {
-	int aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;
-	const int GAME_MAX = 64;
-	int gArr[64]; // GAME_MAX
-
-	while(gDurr != GAME_MAX)
+	char aSpot = 0, button, gDurr = 3, gNow, swSpot = 0;
+	char gArr[MAXGAMES]; 
+        
+	while(gDurr != MAXGAMES)
 	{
 		gNow  = gDurr;
 
@@ -25,14 +24,15 @@ void simonSays()
 		do
 		{
 	 		if(aSpot != 0)
-	 			ledC(button, OFF);
+                          ledC(button, OFF);
 	 		button = gen_rand();
 	 		gArr[aSpot] = button;
 	 		ledC(button, ON);
 	 		aSpot++;
 			lightDelay();
 			lightDelay();
-		}while(aSpot != gDurr);
+		}
+		while(aSpot != gDurr);
 
 		aSpot = 0;
 
@@ -49,26 +49,22 @@ void simonSays()
 				if(!sw2)
 					swSpot = 2;
 				else
+                                {
 					if(!sw3)
 						swSpot = 3;
-					else
-					if(!sw4)
+					else if(!sw4)
 						swSpot = 4;
-					else
-					if(!sw5)
+					else if(!sw5)
 						swSpot = 5;
-					else
-					if(!sw6)
+					else if(!sw6)
 						swSpot = 6;
-					else
-					if(!sw7)
+					else if(!sw7)
 						swSpot = 7;
-					else
-					if(!sw8)
+					else if(!sw8)
 						swSpot = 8;
-					else
-					if(!sw9)
+					else if(!sw9)
 						swSpot = 9;
+                                }
 			if(swSpot == gArr[aSpot])
 			{
 		 		ledC(gArr[aSpot], ON);
@@ -78,9 +74,9 @@ void simonSays()
 		 		ledC(gArr[aSpot], OFF);
 		 		if( aSpot == gDurr)
 		 		{	
-		    		victory();
-					gDurr++;
-				 }
+                                  victory();
+                                  gDurr++;
+                                }
 			}
 			else
 			{

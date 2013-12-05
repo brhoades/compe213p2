@@ -4,6 +4,7 @@
 #include "string.h"
 
 #define NUMLEDS 9
+#define MAXGAMES 64
 
 // Initialize all the lights for the program
 sbit led1 = P2^4;
