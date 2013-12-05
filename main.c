@@ -108,23 +108,33 @@ void msleep(unsigned long ms)
 
 void startupSound()
 {
-    sound( 50, 500 );    
-    msleep( 500 );
-    
-    sound( 100, 500 );    
-    msleep( 500 );
-    
-    sound( 75, 500 );    
-    msleep( 500 );
-    
-    sound( 45, 250 );    
-    msleep( 500 );
-    while( 1 );
+  sound( 60, 500 );    
+  ledC( 1, ON );
+  msleep( 750 );
+  
+  sound( 120, 500 );    
+  ledC( 7, ON );
+  ledC( 5, ON );
+  ledC( 3, ON );
+  msleep( 750 );
+  
+  sound( 75, 500 );   
+  ledC( 9, ON );
+  msleep( 750 );
+  
+  sound( 45, 500 );    
+  ledC( 2, ON );
+  ledC( 4, ON );
+  ledC( 8, ON );
+  ledC( 6, ON );
+  msleep( 750 );
+  
+  TR0 = 0;
 }
 
 void lightDelay()
 {
-  msleep( 15 );
+  msleep( 200 );
 }
 
 void hline()
@@ -177,7 +187,7 @@ void rvline()
 
 void flashleds()
 {
-  int counter = 5, i;
+  int counter = 2, i;
   while(counter != 0)
   {
     for( i=0; i<NUMLEDS; i++ )
