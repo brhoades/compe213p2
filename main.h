@@ -1,3 +1,10 @@
+//CompE 213 Project 2
+//Billy Rhoades
+//Dane Greer
+//Michael Jolley
+//
+//Main Headers Program Code
+
 //#include "reg51.h"
 #ifndef REGNINE
 

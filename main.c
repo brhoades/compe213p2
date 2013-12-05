@@ -1,3 +1,10 @@
+//CompE 213 Project 2
+//Billy Rhoades
+//Dane Greer
+//Michael Jolley
+//
+//Main Program Code
+
 #include "stdio.h"
 //#include "STARTUP.A51"
 #include <intrins.h>
