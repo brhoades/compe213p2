@@ -260,24 +260,30 @@ void simonSays()
   {
     gNow = gDurr;
 
-    //this loop shows the light order
+    // This loop adds on to the top
     do
     {
       button = (char)(rand() % 9); //returns [0,8]
       gArr[aSpot] = button;
       aSpot++;
-      
+    }
+    while(aSpot != gDurr);
+
+    //tell them what to push, the whole way through
+    //previous way was showing only the new one
+    for( aSpot=0; aSpot<gDurr; aSpot++ )
+    {
       //Give them some time to see what we're doing.
-      ledC(button+1, ON);
-      sound( button*SOUNDRANGE, 50 );
+      ledC( gArr[aSpot]+1, ON );
+      sound( gArr[aSpot]*SOUNDRANGE, 50 );
+      
       //As game goes on (gdurr increases), decrease the time between showing.
       msleep( floor( 1500 - ( 500 * ( 1 - ( MAXGAMES - gDurr ) / MAXGAMES ) ) ) );
       TR0 = 0; //cut the sound
       
-      ledC( button+1, OFF );
+      ledC( gArr[aSpot]+1, OFF );
     }
-    while(aSpot != gDurr);
-
+    
     //put our index back at 0 and ask the user to do input
     aSpot = 0;
 
@@ -308,6 +314,7 @@ void simonSays()
         {  
           victory();
           gDurr++;
+          msleep( 1000 );
         }
       }
       else
